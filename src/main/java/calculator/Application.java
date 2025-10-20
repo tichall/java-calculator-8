@@ -1,6 +1,6 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
+import calculator.view.ConsoleView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,9 @@ public class Application {
     }
 
     public static void run() {
-        String input = readInput();
+        ConsoleView view = new ConsoleView();
+
+        String input = view.readInput();
         int sum = 0;
         String targetString = input;
         List<String> numberStrings = new ArrayList<>();
@@ -42,17 +44,7 @@ public class Application {
                 }
             }
         }
-        displayResult(sum);
-    }
-
-
-    public static String readInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine();
-    }
-
-    public static void displayResult(int result) {
-        System.out.println("결과 : " + result);
+        view.displayResult(sum);
     }
 
     public static boolean isNotBlank(String input) {

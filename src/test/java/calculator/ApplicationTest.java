@@ -17,6 +17,30 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용_2() {
+        assertSimpleTest(() -> {
+            run("//s\\n1s10s5s2");
+            assertThat(output()).contains("결과 : 18");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,10,5,2");
+            assertThat(output()).contains("결과 : 18");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용_2() {
+        assertSimpleTest(() -> {
+            run("1;10,5;2");
+            assertThat(output()).contains("결과 : 18");
+        });
+    }
+
+    @Test
     void 빈_입력값() {
         assertSimpleTest(() -> {
             run("\n");

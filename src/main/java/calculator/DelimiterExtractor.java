@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.List;
-
 public class DelimiterExtractor {
     public static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     public static final String CUSTOM_DELIMITER_PREFIX = "//";

@@ -17,10 +17,50 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 빈_입력값() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 공백_입력값() {
+        assertSimpleTest(() -> {
+            run("  ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 예외_테스트_공백_포함_입력값() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1, 2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_음수() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_연속된_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_구분자_외_문자열() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3s10"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
